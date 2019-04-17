@@ -161,7 +161,7 @@ Pedro.prototype.act = function () {
   path.shift();
   if (path.length == 1) {
     Game.engine.lock();
-    alert("Game over - you were captured by Pedro!");
+    alert("Game over!");
   } else {
     x = path[0][0];
     y = path[0][1];
