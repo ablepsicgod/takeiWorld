@@ -51,7 +51,7 @@ let Game = {
     for (let i = 0; i < 10; i++) {
       let index = Math.floor(ROT.RNG.getUniform() * freeCells.length);
       let key = freeCells.splice(index, 1)[0];
-      this.map[key] = "*";
+      this.map[key] = "P";
     }
   },
 
@@ -72,7 +72,7 @@ let Player = function(x, y) {
   this._draw();
 };
 Player.prototype._draw = function() {
-  Game.display.draw(this._x, this._y, "@", "#ff0");
+  Game.display.draw(this._x, this._y, "T", "#ff0");
 };
 /* player movement */
 Player.prototype.act = function() {
