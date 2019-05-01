@@ -1,3 +1,4 @@
+const path = require('path')
 const HtmlWebPackPlugin = require("html-webpack-plugin")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 
@@ -15,7 +16,7 @@ module.exports = {
         test: /\.html$/,
         use: {
           loader: "html-loader",
-          options: { minimize: true }
+          // options: { minimize: true }
         }
       },
       {
