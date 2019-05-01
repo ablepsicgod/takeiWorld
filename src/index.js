@@ -1,4 +1,6 @@
-import { bro } from "./js/test"
+import { Game } from "./js/main"
 import './styles/main.scss'
 
-console.log(bro('sup'))
+Game.init();
+
+// console.log(bro('sup'))

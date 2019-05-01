@@ -1,4 +1,6 @@
-var Game = {
+const ROT = require('rot-js')
+
+const Game = {
   display: null,
   map: {},
   engine: null,
@@ -176,6 +178,4 @@ Pedro.prototype._draw = function () {
   Game.display.draw(this._x, this._y, "O", "red");
 }
 
-
-Game.init();
-
+export { Game }
