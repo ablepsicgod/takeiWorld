@@ -1,5 +1,40 @@
-$bgc: black;
+$bgc: #000;
+$baseColor: #0f0;
 
-body {
+body,html {
   background-color: $bgc;
+  box-sizing: border-box;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+
+div.gui {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  & > h1.title {
+    color: $baseColor;
+  }
+
+  & > div.hp {
+    color: $baseColor;
+    width: 200px;
+    height: 16px;
+    border: 1px solid $baseColor;
+    position: relative;
+
+    & > span {
+      position: absolute;
+      left: -60px;
+      top: -3px;
+    }
+
+    & > div.bar {
+      height: 100%;
+      width: 100%;
+      background-color: $baseColor;
+    }
+  }
 }
