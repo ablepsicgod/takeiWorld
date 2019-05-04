@@ -11,6 +11,7 @@ const Game = {
   player: null,
   pedro: null,
   ananas: null,
+  GameState: 0,
 
   init: function () {
     this.display = new ROT.Display({ spacing: 1.1 });
@@ -24,6 +25,7 @@ const Game = {
 
     this.engine = new ROT.Engine(scheduler);
     this.engine.start();
+    this.GameState = 1;
   },
 
   _generateMap: function () {
@@ -71,6 +73,18 @@ const Game = {
       var y = parseInt(parts[1]);
       this.display.draw(x, y, this.map[key]);
     }
+  },
+
+  _startNewGame: function () {
+    this.display = null;
+    this.map = { };
+    this.engine = null;
+    this.player = null;
+    this.pedro = null;
+    this.ananas = null;
+    this.GameState = 0;
+
+    Game.init();
   }
 };
 
@@ -99,7 +113,7 @@ Player.prototype.act = function () {
 
 Player.prototype.handleEvent = function (e) {
   var code = e.keyCode;
-  if (code == 13 || code == 32) {
+  if (code == 13) {
     this._checkBox();
     return;
   }
@@ -151,8 +165,9 @@ Player.prototype._checkBox = function () {
   if (Game.map[key] != "P") {
     alert("There is no protein here");
   } else if (key == Game.ananas) {
-    alert("Hooray! You found a gym key, move on to the next floor");
+    document.querySelector('.clearScreen').classList.toggle('is-hidden')
     Game.engine.lock();
+    Game.GameState = 2;
     window.removeEventListener("keydown", this);
   } else {
     this.setProtein(this._protein + this._binRemains);
@@ -191,7 +206,8 @@ Pedro.prototype.act = function () {
   path.shift();
   if (path.length == 1) {
     Game.engine.lock();
-    alert("Game over!");
+    document.querySelector('.endScreen').classList.toggle('is-hidden');
+    Game.GameState = 3;
   } else {
     x = path[0][0];
     y = path[0][1];
