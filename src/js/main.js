@@ -214,8 +214,14 @@ Pedro.prototype.act = function () {
     document.querySelector('.endScreen').classList.toggle('is-hidden');
     Game.GameState = 3;
   } else {
-    x = path[0][0];
-    y = path[0][1];
+    try {
+      x = path[0][0];
+      y = path[0][1];
+    } catch {
+      Game.engine.lock();
+      document.querySelector('.endScreen').classList.toggle('is-hidden');
+      Game.GameState = 3;
+    }
     Game.display.draw(this._x, this._y, Game.map[this._x + "," + this._y]);
     this._x = x;
     this._y = y;
