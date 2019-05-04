@@ -1,5 +1,9 @@
 const ROT = require('rot-js')
 
+
+/********************************************************
+ * Game
+********************************************************/
 const Game = {
   display: null,
   map: {},
@@ -70,9 +74,17 @@ const Game = {
   }
 };
 
+
+/******************************************************** 
+ * PLAYER
+********************************************************/
 var Player = function (x, y) {
   this._x = x;
   this._y = y;
+  this._protein = 100;
+  this._calories = 1;
+  this._binRemains = 10;
+  this._proteinGUI = document.querySelector('.bar');
   this._draw();
 }
 
@@ -116,8 +128,18 @@ Player.prototype.handleEvent = function (e) {
   this._x = newX;
   this._y = newY;
   this._draw();
+  this.setProtein(this._protein - this._calories);
+  this.updateProteinGUI();
   window.removeEventListener("keydown", this);
   Game.engine.unlock();
+}
+
+Player.prototype.setProtein = function (proteinAmount) {
+  this._protein = proteinAmount;
+}
+
+Player.prototype.updateProteinGUI = function (){ 
+  this._proteinGUI.style.width = `${this._protein}%`;
 }
 
 Player.prototype._draw = function () {
@@ -129,14 +151,20 @@ Player.prototype._checkBox = function () {
   if (Game.map[key] != "P") {
     alert("There is no protein here");
   } else if (key == Game.ananas) {
-    alert("Hooray! You found an Protein and won this game.");
+    alert("Hooray! You found a gym key, move on to the next floor");
     Game.engine.lock();
     window.removeEventListener("keydown", this);
   } else {
-    alert("This Protein bin is empty :-(");
+    this.setProtein(this._protein + this._binRemains);
+    this.updateProteinGUI();
+    alert("This is just protein bar :-(");
   }
 }
 
+
+/********************************************************
+ * Pedro
+********************************************************/
 var Pedro = function (x, y) {
   this._x = x;
   this._y = y;
