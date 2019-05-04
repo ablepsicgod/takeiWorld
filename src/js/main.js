@@ -150,6 +150,11 @@ Player.prototype.handleEvent = function (e) {
 
 Player.prototype.setProtein = function (proteinAmount) {
   this._protein = proteinAmount;
+  if (this._protein > 100) {
+    this._protein = 100;
+  } else if (this._protein < 0) {
+    this._protein = 0;
+  }
 }
 
 Player.prototype.updateProteinGUI = function (){ 
